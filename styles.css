@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    font-family: 'Roboto';
+    padding: 0;
+}
+
+body {
+    background: rgb(229, 243, 250);
+}
+
+.main-container {
+    background-color: white;
+    border-radius: 12px;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 8rem;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.main-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-container input {
+    width: 100%;
+    background-color: rgb(243, 247, 255);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.grocery-input {
+    padding: 6px 15px;
+    border: none;
+    font-size: 17px;
+}
+
+.submit-btn {
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 0 15px;
+    font-size: 16px;
+    background-color: rgb(159, 253, 166);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.submit-btn:hover {
+    background-color: rgb(139, 221, 144);
+}
+
+.all-items {
+    margin-top: 30px;
+}
+
+.grocery-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.grocery-item:hover {
+    background-color: rgb(243, 247, 255);
+}
+
+.grocery-item p {
+    padding: 6px 10px;
+}
+
+.fas {
+    display: flex;
+    align-items: center;
+}
+
+.btns-container {
+    display: flex;
+    gap: 6px;
+}
+
+.btns-container button {
+    border-radius: 40px;
+    padding: 3px 3px;
+    border: none;
+    cursor: pointer;
+}
+
+.btns-container img {
+    height: 20px;
+}
+
+.remove-btn {
+    background-color: rgb(255, 122, 108);
+    transition: 0.2s;
+}
+
+.remove-btn:hover {
+    background-color: rgb(224, 93, 79);
+}
+
+.edit-btn {
+    background-color: rgba(29, 178, 228, 0.429);
+    transition: 0.2s;
+}
+
+.edit-btn:hover {
+    background-color: rgba(2, 121, 161, 0.429);
+}
+
+.clear-items {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.clear-btn {
+    color: rgb(255, 43, 0);
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.clear-btn:hover {
+    color: rgb(208, 38, 4);
+}
