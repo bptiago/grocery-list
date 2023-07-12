@@ -2,7 +2,7 @@ const form = document.querySelector('.form-container');
 const groceryInput = document.querySelector('.grocery-input');
 const groceryList = document.querySelector('.all-items');
 const clearAllBtn = document.querySelector('.clear-btn');
-const groceryRemoveBtn = document.querySelector('.remove-btn');
+const notifMsg = document.querySelector('.notif-msg');
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -10,7 +10,7 @@ form.addEventListener('submit', (e) => {
         handleInput();
         groceryInput.value = '';
     } else {
-        //sendError();
+        sendNotifMsg("alert-msg", "Please type a valid input", 2000);
     }
 });
 
@@ -33,6 +33,9 @@ function handleInput() {
     </div>`;
     // Append newItem as child of groceryList
     groceryList.appendChild(newItem);
+    // Acess to buttons can happen only here
+    const removeBtn = document.querySelector('.remove-btn');
+    removeBtn.addEventListener('click', removeItem);
 };
 
 function clearList() {
@@ -40,4 +43,21 @@ function clearList() {
     for (let item of itemsList) {
         item.remove();
     };
+    sendNotifMsg("alert-msg", "List cleared", 1500);
 };
+
+function removeItem(e) {
+    const element = e.currentTarget.parentElement.parentElement;
+    element.remove();
+    sendNotifMsg("alert-msg", "Item removed", 1500);
+};
+
+function sendNotifMsg (className, msg, timer) {
+    notifMsg.style.color = 'black';
+    notifMsg.classList.add(className);
+    notifMsg.innerHTML = msg;
+    setTimeout( () => {
+        notifMsg.classList.remove(className);
+        notifMsg.style.color = 'transparent';
+    }, timer);
+}
