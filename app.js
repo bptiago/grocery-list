@@ -15,33 +15,17 @@ form.addEventListener('submit', (e) => {
     }
 });
 
- // On setup, display items that are stored locally
- window.addEventListener("DOMContentLoaded", loadLocalStorageList);
+// On setup, display items that are stored locally
+window.addEventListener("DOMContentLoaded", loadLocalStorageList);
 
 function handleInput() {
-    const newItem = document.createElement('div');
-    // Add class
-    newItem.classList.add('grocery-item');
-    // Add ID to new item
-    const id = new Date().getTime().toString();
-    newItem.setAttribute('id', id);
     // Get input value
     const value = groceryInput.value;
-    // Add HTML sequence to newItem
-    newItem.innerHTML = ` <p>${value}</p>
-    <div class="btns-container">
-        <button class="remove-btn">
-            <a class="fas fa-delete">
-                <img src="./images/delete-icon.png" alt="remove icon">
-            </a>
-        </button> 
-    </div>`;
-    // Append newItem as child of groceryList
-    groceryList.appendChild(newItem);
-    // Access to buttons can happen only here
-    const removeBtn = document.querySelector('.remove-btn');
-    removeBtn.addEventListener('click', removeItem);
-    addToLocalStorage(id, groceryInput.value);
+    // Create ID to new item
+    const id = new Date().getTime().toString();
+    // Create DIV
+    createGroceryItem(id, value);
+    addToLocalStorage(id, value);
 };
 
 function clearList() {
@@ -54,10 +38,11 @@ function clearList() {
 };
 
 function removeItem(e) {
+    console.log('activated')
     const element = e.currentTarget.parentElement.parentElement;
     const id = element.id;
-    element.remove();
     removeFromLocalStorage(id);
+    element.remove();
     sendNotifMsg("alert-msg", "Item removed", 1500);
 };
 
@@ -77,7 +62,7 @@ function addToLocalStorage(id, value) {
     let items = getLocalStorageList();
     items.push(grocery);
     localStorage.setItem('list', JSON.stringify(items));
-    console.log(items)
+
 }
 
 // Get local storage data
@@ -86,7 +71,7 @@ function getLocalStorageList() {
 }
 
 // Remove item from local storage
- function removeFromLocalStorage(id) {
+function removeFromLocalStorage(id) {
     let items = getLocalStorageList();
     items = items.filter((item) => {
         if (item.id !== id) {
@@ -94,22 +79,22 @@ function getLocalStorageList() {
         }
     });
     localStorage.setItem('list', JSON.stringify(items));
- }
+}
 
- function loadLocalStorageList() {
+function loadLocalStorageList() {
     let items = getLocalStorageList();
     if (items.length > 0) {
         items.forEach((item) => {
             createGroceryItem(item.id, item.value);
         })
     }
- }
+}
 
- function createGroceryItem(id, value) {
+function createGroceryItem(id, value) {
     const newItem = document.createElement('div');
     // Add class
     newItem.classList.add('grocery-item');
-    // Add ID to new item
+    // Add id to new item
     newItem.setAttribute('id', id);
     // Add HTML sequence to newItem
     newItem.innerHTML = ` <p>${value}</p>
@@ -123,7 +108,9 @@ function getLocalStorageList() {
     // Append newItem as child of groceryList
     groceryList.appendChild(newItem);
     // Access to buttons can happen only here
-    const removeBtn = document.querySelector('.remove-btn');
-    removeBtn.addEventListener('click', removeItem);
-    
- }
+    // Has to use querySelectorAll otherwise only the first element found will have the eventListener applied
+    const removeBtn = document.querySelectorAll('.remove-btn');
+    removeBtn.forEach((item) => {
+        item.addEventListener('click', removeItem);
+    });
+}
